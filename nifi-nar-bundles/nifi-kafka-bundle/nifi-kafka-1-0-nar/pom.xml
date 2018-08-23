@@ -20,6 +20,7 @@
         <version>1.7.0</version>
     </parent>
     <artifactId>nifi-kafka-1-0-nar</artifactId>
+    <version>1.8.0-SNAPSHOT</version>
     <packaging>nar</packaging>
     <description>NiFi NAR for interacting with Apache Kafka 1.0</description>
     <properties>
@@ -34,7 +35,7 @@
         <dependency>
             <groupId>org.apache.nifi</groupId>
             <artifactId>nifi-standard-services-api-nar</artifactId>
-            <version>1.7.0</version>
+            <version>1.8.0-SNAPSHOT</version>
             <type>nar</type>
         </dependency>
     </dependencies>
