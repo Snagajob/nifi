@@ -1,0 +1,21 @@
+version: 2
+
+workflows:
+  version: 2
+  ci-pipeline:
+    jobs:
+    - build:
+        filters:
+          branches:
+            only:
+            - snag/1.9.0-SNAPSHOT
+
+jobs:
+  build:
+    docker:
+    - image: circleci/openjdk:8u181-jdk-node-browsers
+    steps:
+    - checkout
+    - run:
+        name: Maven build & deploy
+        command: mvn -P snag deploy
