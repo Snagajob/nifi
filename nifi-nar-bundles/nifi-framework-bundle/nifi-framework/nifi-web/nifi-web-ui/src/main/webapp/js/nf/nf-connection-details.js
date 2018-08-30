@@ -384,6 +384,9 @@
                 }, {
                     name: 'Settings',
                     tabContentId: 'read-only-connection-settings-tab-content'
+                }, {
+                    name: 'Reporting',
+                    tabContentId: 'read-only-connection-reporting-tab-content'
                 }]
             });
 
@@ -431,6 +434,10 @@
                         $('#read-only-back-pressure-object-threshold').text('');
                         $('#read-only-back-pressure-data-size-threshold').text('');
                         $('#read-only-prioritizers').empty();
+
+                        // clear the metric reporting settings
+                        $('#read-only-report-metrics').text('');
+                        $('#read-only-metric-prefix').text('');
                     },
                     open: function () {
                         nfCommon.toggleScrollable($('#' + this.find('.tab-container').attr('id') + '-content').get(0));
@@ -521,6 +528,8 @@
                         nfCommon.populateField('read-only-flow-file-expiration', connection.flowFileExpiration);
                         nfCommon.populateField('read-only-back-pressure-object-threshold', connection.backPressureObjectThreshold);
                         nfCommon.populateField('read-only-back-pressure-data-size-threshold', connection.backPressureDataSizeThreshold);
+                        nfCommon.populateField('read-only-connection-report-metrics', connection.monitored);
+                        nfCommon.populateField('read-only-connection-metric-prefix', connection.metricPrefix);
 
                         // prioritizers
                         if (nfCommon.isDefinedAndNotNull(connection.prioritizers) && connection.prioritizers.length > 0) {

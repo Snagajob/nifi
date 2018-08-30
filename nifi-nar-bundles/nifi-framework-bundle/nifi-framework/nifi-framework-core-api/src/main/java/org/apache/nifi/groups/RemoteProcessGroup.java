@@ -203,6 +203,14 @@ public interface RemoteProcessGroup extends ComponentAuthorizable, Positionable,
 
     String getNetworkInterface();
 
+    Boolean getMonitored();
+
+    void setMonitored(Boolean monitored);
+
+    String getMetricPrefix();
+
+    void setMetricPrefix(String prefix);
+
     /**
      * Returns the InetAddress that the will this instance will bind to when communicating with a
      * remote NiFi instance, or <code>null</code> if no specific address has been specified

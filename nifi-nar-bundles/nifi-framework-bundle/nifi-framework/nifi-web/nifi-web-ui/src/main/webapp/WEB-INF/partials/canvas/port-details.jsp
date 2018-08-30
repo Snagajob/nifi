@@ -35,5 +35,23 @@
                 <div id="read-only-port-comments"></div>
             </div>
         </div>
+        <div class="port-setting">
+            <div class="setting-name">
+                Report Metrics?
+                <div class="fa fa-question-circle" alt="Info" title="Should metrics for this port be included by Metric Reporting Tasks?"></div>
+            </div>
+            <div class="setting-field">
+                <div id="read-only-port-report-metrics"></div>
+            </div>
+        </div>
+        <div class="port-setting">
+            <div class="setting-name">
+                Metric Prefix
+                <div class="fa fa-question-circle" alt="Info" title="Prefix for metrics reported by this port (default is port name)."></div>
+            </div>
+            <div class="setting-field">
+                <div id="read-only-port-metric-prefix"></div>
+            </div>
+        </div>
     </div>
 </div>

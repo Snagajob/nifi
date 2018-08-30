@@ -145,6 +145,8 @@ public class FlowFromDOMFactory {
         dto.setName(getString(element, "name"));
         dto.setPosition(getPosition(DomUtils.getChild(element, "position")));
         dto.setComments(getString(element, "comment"));
+        dto.setMonitored(getBoolean(element, "monitored"));
+        dto.setMetricPrefix(getString(element, "metricPrefix"));
 
         final Map<String, String> variables = new HashMap<>();
         final NodeList variableList = DomUtils.getChildNodesByTagName(element, "variable");
@@ -242,6 +244,8 @@ public class FlowFromDOMFactory {
         final ConnectionDTO dto = new ConnectionDTO();
         dto.setId(getString(element, "id"));
         dto.setName(getString(element, "name"));
+        dto.setMonitored(getBoolean(element, "monitored"));
+        dto.setMetricPrefix(getString(element, "metricPrefix"));
         dto.setLabelIndex(getOptionalInt(element, "labelIndex"));
         dto.setzIndex(getOptionalLong(element, "zIndex"));
         dto.setVersionedComponentId(getString(element, "versionedComponentId"));
@@ -315,6 +319,8 @@ public class FlowFromDOMFactory {
         dto.setProxyPort(getOptionalInt(element, "proxyPort"));
         dto.setProxyUser(getString(element, "proxyUser"));
         dto.setLocalNetworkInterface(getString(element, "networkInterface"));
+        dto.setMonitored(getBoolean(element, "monitored"));
+        dto.setMetricPrefix(getString(element, "metricPrefix"));
 
         final String rawPassword = getString(element, "proxyPassword");
         final String proxyPassword = encryptor == null ? rawPassword : decrypt(rawPassword, encryptor);
@@ -353,6 +359,8 @@ public class FlowFromDOMFactory {
         portDTO.setPosition(getPosition(DomUtils.getChild(element, "position")));
         portDTO.setName(getString(element, "name"));
         portDTO.setComments(getString(element, "comments"));
+        portDTO.setMonitored(getBoolean(element, "monitored"));
+        portDTO.setMetricPrefix(getString(element, "metricPrefix"));
         final ScheduledState scheduledState = getScheduledState(element);
         portDTO.setState(scheduledState.toString());
 
@@ -431,6 +439,8 @@ public class FlowFromDOMFactory {
         configDto.setYieldDuration(getString(element, "yieldPeriod"));
         configDto.setBulletinLevel(getString(element, "bulletinLevel"));
         configDto.setLossTolerant(getBoolean(element, "lossTolerant"));
+        configDto.setMonitored(getBoolean(element, "monitored"));
+        configDto.setMetricPrefix(getString(element, "metricPrefix"));
         final ScheduledState scheduledState = getScheduledState(element);
         dto.setState(scheduledState.toString());
 

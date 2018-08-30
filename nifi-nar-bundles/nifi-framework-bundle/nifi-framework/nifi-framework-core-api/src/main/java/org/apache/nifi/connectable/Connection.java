@@ -83,4 +83,12 @@ public interface Connection extends Authorizable, VersionedComponent {
     void verifyCanUpdate() throws IllegalStateException;
 
     void verifyCanDelete() throws IllegalStateException;
+
+    Boolean getMonitored();
+
+    void setMonitored(Boolean monitored);
+
+    String getMetricPrefix();
+
+    void setMetricPrefix(String prefix);
 }

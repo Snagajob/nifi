@@ -16,6 +16,7 @@
  */
 package org.apache.nifi.web.api.dto;
 
+import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
 import javax.xml.bind.annotation.XmlType;
@@ -44,6 +45,8 @@ public class ProcessorConfigDTO {
     private String comments;
     private String customUiUrl;
     private Boolean lossTolerant;
+    private Boolean monitored;
+    private String metricPrefix;
 
     // annotation data
     private String annotationData;
@@ -173,6 +176,34 @@ public class ProcessorConfigDTO {
 
     public void setLossTolerant(final Boolean lossTolerant) {
         this.lossTolerant = lossTolerant;
+    }
+
+    /**
+     * @return whether or not this Processor reports metrics for monitoring
+     */
+    @ApiModelProperty(
+            value = "Whether this processor reports metrics for monitoring"
+    )
+    public Boolean isMonitored() {
+        return monitored;
+    }
+
+    public void setMonitored(final Boolean monitored) {
+        this.monitored = monitored;
+    }
+
+    /**
+     * @return prefix for metric names reported for this Processor
+     */
+    @ApiModelProperty(
+            value = "Prefix for metric names reported for this processor"
+    )
+    public String getMetricPrefix() {
+        return metricPrefix;
+    }
+
+    public void setMetricPrefix(String metricPrefix) {
+        this.metricPrefix = metricPrefix;
     }
 
     /**

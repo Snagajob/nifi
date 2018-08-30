@@ -662,6 +662,8 @@ public final class DtoFactory {
         }
         dto.setBends(bendPoints);
         dto.setName(connection.getName());
+        dto.setMonitored(connection.getMonitored());
+        dto.setMetricPrefix(connection.getMetricPrefix());
         dto.setLabelIndex(connection.getLabelIndex());
         dto.setzIndex(connection.getZIndex());
         dto.setSource(createConnectableDto(connection.getSource()));
@@ -1286,6 +1288,8 @@ public final class DtoFactory {
         dto.setPosition(createPositionDto(port.getPosition()));
         dto.setName(port.getName());
         dto.setComments(port.getComments());
+        dto.setMonitored(port.getMonitored());
+        dto.setMetricPrefix(port.getMetricPrefix());
         dto.setConcurrentlySchedulableTaskCount(port.getMaxConcurrentTasks());
         dto.setParentGroupId(port.getProcessGroup().getIdentifier());
         dto.setState(port.getScheduledState().toString());
@@ -1689,6 +1693,8 @@ public final class DtoFactory {
         }
 
         dto.setLocalNetworkInterface(group.getNetworkInterface());
+        dto.setMonitored(group.getMonitored());
+        dto.setMetricPrefix(group.getMetricPrefix());
 
         dto.setActiveRemoteInputPortCount(activeRemoteInputPortCount);
         dto.setInactiveRemoteInputPortCount(inactiveRemoteInputPortCount);
@@ -2228,6 +2234,8 @@ public final class DtoFactory {
         dto.setPosition(createPositionDto(group.getPosition()));
         dto.setComments(group.getComments());
         dto.setName(group.getName());
+        dto.setMonitored(group.getMonitored());
+        dto.setMetricPrefix(group.getMetricPrefix());
         dto.setVersionedComponentId(group.getVersionedComponentId().orElse(null));
         dto.setVersionControlInformation(createVersionControlInformationDto(group));
 
@@ -3568,6 +3576,8 @@ public final class DtoFactory {
         dto.setSchedulingStrategy(procNode.getSchedulingStrategy().name());
         dto.setExecutionNode(procNode.getExecutionNode().name());
         dto.setAnnotationData(procNode.getAnnotationData());
+        dto.setMonitored(procNode.getMonitored());
+        dto.setMetricPrefix(procNode.getMetricPrefix());
 
         // set up the default values for concurrent tasks and scheduling period
         final Map<String, String> defaultConcurrentTasks = new HashMap<>();

@@ -70,6 +70,8 @@
                         nfCommon.clearField('read-only-remote-process-group-proxy-port');
                         nfCommon.clearField('read-only-remote-process-group-proxy-user');
                         nfCommon.clearField('read-only-remote-process-group-proxy-password');
+                        nfCommon.clearField('read-only-report-metrics');
+                        nfCommon.clearField('read-only-metric-prefix');
                     }
                 }
             });
@@ -97,6 +99,8 @@
                 nfCommon.populateField('read-only-remote-process-group-proxy-port', selectionData.component.proxyPort);
                 nfCommon.populateField('read-only-remote-process-group-proxy-user', selectionData.component.proxyUser);
                 nfCommon.populateField('read-only-remote-process-group-proxy-password', selectionData.component.proxyPassword);
+                nfCommon.populateField('read-only-remote-process-group-report-metrics', selectionData.component.monitored);
+                nfCommon.populateField('read-only-remote-process-group-metric-prefix', selectionData.component.metricPrefix);
 
                 // show the details
                 $('#remote-process-group-details').modal('show');

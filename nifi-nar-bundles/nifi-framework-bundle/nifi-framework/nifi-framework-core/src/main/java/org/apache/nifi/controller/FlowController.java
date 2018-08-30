@@ -2930,6 +2930,9 @@ public class FlowController implements EventAccess, ControllerServiceProvider, R
         final ProcessGroupStatus status = new ProcessGroupStatus();
         status.setId(group.getIdentifier());
         status.setName(isAuthorized.evaluate(group) ? group.getName() : group.getIdentifier());
+        status.setReportMetrics(group.getMonitored());
+        status.setMetricPrefix(group.getMetricPrefix());
+
         int activeGroupThreads = 0;
         int terminatedGroupThreads = 0;
         long bytesRead = 0L;
@@ -3036,6 +3039,8 @@ public class FlowController implements EventAccess, ControllerServiceProvider, R
             connStatus.setDestinationName(isDestinationAuthorized ? conn.getDestination().getName() : conn.getDestination().getIdentifier());
             connStatus.setBackPressureDataSizeThreshold(conn.getFlowFileQueue().getBackPressureDataSizeThreshold());
             connStatus.setBackPressureObjectThreshold(conn.getFlowFileQueue().getBackPressureObjectThreshold());
+            connStatus.setReportMetrics(conn.getMonitored());
+            connStatus.setMetricPrefix(conn.getMetricPrefix());
 
             final FlowFileEvent connectionStatusReport = statusReport.getReportEntry(conn.getIdentifier());
             if (connectionStatusReport != null) {
@@ -3103,6 +3108,8 @@ public class FlowController implements EventAccess, ControllerServiceProvider, R
             portStatus.setGroupId(port.getProcessGroup().getIdentifier());
             portStatus.setName(isInputPortAuthorized ? port.getName() : port.getIdentifier());
             portStatus.setActiveThreadCount(processScheduler.getActiveThreadCount(port));
+            portStatus.setReportMetrics(port.getMonitored());
+            portStatus.setMetricPrefix(port.getMetricPrefix());
 
             // determine the run status
             if (ScheduledState.RUNNING.equals(port.getScheduledState())) {
@@ -3166,6 +3173,8 @@ public class FlowController implements EventAccess, ControllerServiceProvider, R
             portStatus.setGroupId(port.getProcessGroup().getIdentifier());
             portStatus.setName(isOutputPortAuthorized ? port.getName() : port.getIdentifier());
             portStatus.setActiveThreadCount(processScheduler.getActiveThreadCount(port));
+            portStatus.setReportMetrics(port.getMonitored());
+            portStatus.setMetricPrefix(port.getMetricPrefix());
 
             // determine the run status
             if (ScheduledState.RUNNING.equals(port.getScheduledState())) {
@@ -3261,6 +3270,8 @@ public class FlowController implements EventAccess, ControllerServiceProvider, R
         status.setGroupId(remoteGroup.getProcessGroup().getIdentifier());
         status.setName(isRemoteProcessGroupAuthorized ? remoteGroup.getName() : remoteGroup.getIdentifier());
         status.setTargetUri(isRemoteProcessGroupAuthorized ? remoteGroup.getTargetUri() : null);
+        status.setReportMetrics(remoteGroup.getMonitored());
+        status.setMetricPrefix(remoteGroup.getMetricPrefix());
 
         long lineageMillis = 0L;
         int flowFilesRemoved = 0;
@@ -3390,6 +3401,9 @@ public class FlowController implements EventAccess, ControllerServiceProvider, R
         status.setExecutionNode(procNode.getExecutionNode());
         status.setTerminatedThreadCount(procNode.getTerminatedThreadCount());
         status.setActiveThreadCount(processScheduler.getActiveThreadCount(procNode));
+
+        status.setReportMetrics(procNode.getMonitored());
+        status.setMetricPrefix(procNode.getMetricPrefix());
 
         return status;
     }

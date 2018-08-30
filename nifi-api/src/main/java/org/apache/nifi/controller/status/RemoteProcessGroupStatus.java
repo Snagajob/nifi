@@ -38,6 +38,9 @@ public class RemoteProcessGroupStatus implements Cloneable {
 
     private long averageLineageDuration;
 
+    private boolean reportMetrics;
+    private String metricPrefix;
+
     public String getTargetUri() {
         return uri;
     }
@@ -150,6 +153,22 @@ public class RemoteProcessGroupStatus implements Cloneable {
         this.averageLineageDuration = timeUnit.toMillis(duration);
     }
 
+    public boolean isReportMetrics() {
+        return reportMetrics;
+    }
+
+    public void setReportMetrics(boolean reportMetrics) {
+        this.reportMetrics = reportMetrics;
+    }
+
+    public String getMetricPrefix() {
+        return metricPrefix;
+    }
+
+    public void setMetricPrefix(String metricPrefix) {
+        this.metricPrefix = metricPrefix;
+    }
+
     @Override
     public RemoteProcessGroupStatus clone() {
         final RemoteProcessGroupStatus clonedObj = new RemoteProcessGroupStatus();
@@ -166,6 +185,8 @@ public class RemoteProcessGroupStatus implements Cloneable {
         clonedObj.activeRemotePortCount = activeRemotePortCount;
         clonedObj.inactiveRemotePortCount = inactiveRemotePortCount;
         clonedObj.averageLineageDuration = averageLineageDuration;
+        clonedObj.reportMetrics = reportMetrics;
+        clonedObj.metricPrefix = metricPrefix;
         return clonedObj;
     }
 
@@ -196,6 +217,10 @@ public class RemoteProcessGroupStatus implements Cloneable {
         builder.append(activeRemotePortCount);
         builder.append(", inactiveRemotePortCount=");
         builder.append(inactiveRemotePortCount);
+        builder.append(", reportMetrics=");
+        builder.append(reportMetrics);
+        builder.append(", metricPrefix=");
+        builder.append(metricPrefix);
         builder.append("]");
         return builder.toString();
     }

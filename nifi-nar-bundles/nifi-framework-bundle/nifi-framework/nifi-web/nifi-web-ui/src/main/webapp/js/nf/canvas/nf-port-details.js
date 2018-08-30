@@ -64,6 +64,8 @@
                         nfCommon.clearField('read-only-port-name');
                         nfCommon.clearField('read-only-port-id');
                         nfCommon.clearField('read-only-port-comments');
+                        nfCommon.clearField('read-only-port-report-metrics');
+                        nfCommon.clearField('read-only-port-metric-prefix');
                     }
                 }
             });
@@ -78,6 +80,8 @@
                 nfCommon.populateField('read-only-port-name', selectionData.component.name);
                 nfCommon.populateField('read-only-port-id', selectionData.id);
                 nfCommon.populateField('read-only-port-comments', selectionData.component.comments);
+                nfCommon.populateField('read-only-port-report-metrics', selectionData.component.monitored);
+                nfCommon.populateField('read-only-port-metric-prefix', selectionData.component.metricPrefix);
 
                 // show the details
                 $('#port-details').modal('show');

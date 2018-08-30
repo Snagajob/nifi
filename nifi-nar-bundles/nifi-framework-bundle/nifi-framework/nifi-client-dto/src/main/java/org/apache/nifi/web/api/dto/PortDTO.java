@@ -37,6 +37,9 @@ public class PortDTO extends ComponentDTO {
     private Set<String> userAccessControl;
     private Set<String> groupAccessControl;
 
+    private Boolean monitored;
+    private String metricPrefix;
+
     private Collection<String> validationErrors;
 
     /**
@@ -171,4 +174,31 @@ public class PortDTO extends ComponentDTO {
         this.validationErrors = validationErrors;
     }
 
+    /**
+     * @return whether or not this port reports metrics for monitoring
+     */
+    @ApiModelProperty(
+            value = "Whether this connection reports metrics for monitoring"
+    )
+    public Boolean isMonitored() {
+        return monitored;
+    }
+
+    public void setMonitored(final Boolean monitored) {
+        this.monitored = monitored;
+    }
+
+    /**
+     * @return prefix for metric names reported for this port
+     */
+    @ApiModelProperty(
+            value = "Prefix for metric names reported for this connection"
+    )
+    public String getMetricPrefix() {
+        return metricPrefix;
+    }
+
+    public void setMetricPrefix(String metricPrefix) {
+        this.metricPrefix = metricPrefix;
+    }
 }

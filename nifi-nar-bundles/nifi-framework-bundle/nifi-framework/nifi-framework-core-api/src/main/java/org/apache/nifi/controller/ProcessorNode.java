@@ -114,6 +114,14 @@ public abstract class ProcessorNode extends AbstractComponentNode implements Con
 
     public abstract void setStyle(Map<String, String> style);
 
+    public abstract Boolean getMonitored();
+
+    public abstract void setMonitored(Boolean monitored);
+
+    public abstract String getMetricPrefix();
+
+    public abstract void setMetricPrefix(String metricPrefix);
+
     /**
      * @return the number of threads (concurrent tasks) currently being used by
      *         this Processor

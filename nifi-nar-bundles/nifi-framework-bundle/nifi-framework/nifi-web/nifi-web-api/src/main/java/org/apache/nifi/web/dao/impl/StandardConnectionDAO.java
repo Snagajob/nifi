@@ -197,6 +197,12 @@ public class StandardConnectionDAO extends ComponentDAO implements ConnectionDAO
         if (isNotNull(connectionDTO.getzIndex())) {
             connection.setZIndex(connectionDTO.getzIndex());
         }
+        if (isNotNull(connectionDTO.isMonitored())) {
+            connection.setMonitored(connectionDTO.isMonitored());
+        }
+        if (isNotNull(connectionDTO.getMetricPrefix())) {
+            connection.setMetricPrefix(connectionDTO.getMetricPrefix());
+        }
     }
 
     /**

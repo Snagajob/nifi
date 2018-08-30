@@ -142,6 +142,30 @@ public interface ProcessGroup extends ComponentAuthorizable, Positionable, Versi
     void setComments(String comments);
 
     /**
+     * Should metrics for this process group be included in metric reporting tasks?
+     * @return
+     */
+    Boolean getMonitored();
+
+    /**
+     * Set whether metrics for this process group should be included in metric reporting tasks
+     * @param monitored
+     */
+    void setMonitored(Boolean monitored);
+
+    /**
+     * Get prefix to metrics reported for this process group
+     * @return
+     */
+    String getMetricPrefix();
+
+    /**
+     * Set prefix to metrics reported for this process group
+     * @param prefix
+     */
+    void setMetricPrefix(String prefix);
+
+    /**
      * @return the counts for this ProcessGroup
      */
     ProcessGroupCounts getCounts();

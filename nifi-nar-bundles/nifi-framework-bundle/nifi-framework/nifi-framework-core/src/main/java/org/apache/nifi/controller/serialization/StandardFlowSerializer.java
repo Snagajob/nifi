@@ -195,6 +195,8 @@ public class StandardFlowSerializer implements FlowSerializer<Document> {
         addTextElement(element, "name", group.getName());
         addPosition(element, group.getPosition());
         addTextElement(element, "comment", group.getComments());
+        addTextElement(element, "monitored", group.getMonitored().toString());
+        addTextElement(element, "metricPrefix", group.getMetricPrefix());
 
         final VersionControlInformation versionControlInfo = group.getVersionControlInformation();
         if (versionControlInfo != null) {
@@ -358,6 +360,12 @@ public class StandardFlowSerializer implements FlowSerializer<Document> {
         if (remoteRef.getNetworkInterface() != null) {
             addTextElement(element, "networkInterface", remoteRef.getNetworkInterface());
         }
+        if (remoteRef.getMonitored() != null) {
+            addTextElement(element, "monitored", remoteRef.getMonitored().toString());
+        }
+        if (remoteRef.getMetricPrefix() != null) {
+            addTextElement(element, "metricPrefix", remoteRef.getMetricPrefix());
+        }
 
         for (final RemoteGroupPort port : remoteRef.getInputPorts()) {
             if (port.hasIncomingConnection()) {
@@ -412,6 +420,8 @@ public class StandardFlowSerializer implements FlowSerializer<Document> {
         addTextElement(element, "name", port.getName());
         addPosition(element, port.getPosition());
         addTextElement(element, "comments", port.getComments());
+        addTextElement(element, "monitored", port.getMonitored().toString());
+        addTextElement(element, "metricPrefix", port.getMetricPrefix());
         addTextElement(element, "scheduledState", scheduledStateLookup.getScheduledState(port).name());
 
         parentElement.appendChild(element);
@@ -426,6 +436,8 @@ public class StandardFlowSerializer implements FlowSerializer<Document> {
         addTextElement(element, "name", port.getName());
         addPosition(element, port.getPosition());
         addTextElement(element, "comments", port.getComments());
+        addTextElement(element, "monitored", port.getMonitored().toString());
+        addTextElement(element, "metricPrefix", port.getMetricPrefix());
         addTextElement(element, "scheduledState", scheduledStateLookup.getScheduledState(port).name());
         addTextElement(element, "maxConcurrentTasks", String.valueOf(port.getMaxConcurrentTasks()));
         for (final String user : port.getUserAccessControl()) {
@@ -464,6 +476,8 @@ public class StandardFlowSerializer implements FlowSerializer<Document> {
         addTextElement(element, "schedulingStrategy", processor.getSchedulingStrategy().name());
         addTextElement(element, "executionNode", processor.getExecutionNode().name());
         addTextElement(element, "runDurationNanos", processor.getRunDuration(TimeUnit.NANOSECONDS));
+        addTextElement(element, "monitored", processor.getMonitored().toString());
+        addTextElement(element, "metricPrefix", processor.getMetricPrefix());
 
         addConfiguration(element, processor.getProperties(), processor.getAnnotationData(), encryptor);
 
@@ -507,6 +521,8 @@ public class StandardFlowSerializer implements FlowSerializer<Document> {
         addTextElement(element, "id", connection.getIdentifier());
         addTextElement(element, "versionedComponentId", connection.getVersionedComponentId());
         addTextElement(element, "name", connection.getName());
+        addTextElement(element, "monitored", connection.getMonitored().toString());
+        addTextElement(element, "metricPrefix", connection.getMetricPrefix());
 
         final Element bendPointsElement = doc.createElement("bendPoints");
         element.appendChild(bendPointsElement);

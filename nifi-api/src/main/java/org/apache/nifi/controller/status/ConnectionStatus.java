@@ -41,6 +41,9 @@ public class ConnectionStatus implements Cloneable {
     private int maxQueuedCount;
     private long maxQueuedBytes;
 
+    private boolean reportMetrics;
+    private String metricPrefix;
+
     public String getId() {
         return id;
     }
@@ -186,6 +189,22 @@ public class ConnectionStatus implements Cloneable {
         this.backPressureBytesThreshold = backPressureBytesThreshold;
     }
 
+    public boolean isReportMetrics() {
+        return reportMetrics;
+    }
+
+    public void setReportMetrics(boolean reportMetrics) {
+        this.reportMetrics = reportMetrics;
+    }
+
+    public String getMetricPrefix() {
+        return metricPrefix;
+    }
+
+    public void setMetricPrefix(String metricPrefix) {
+        this.metricPrefix = metricPrefix;
+    }
+
     @Override
     public ConnectionStatus clone() {
         final ConnectionStatus clonedObj = new ConnectionStatus();
@@ -206,6 +225,8 @@ public class ConnectionStatus implements Cloneable {
         clonedObj.backPressureObjectThreshold = backPressureObjectThreshold;
         clonedObj.maxQueuedBytes = maxQueuedBytes;
         clonedObj.maxQueuedCount = maxQueuedCount;
+        clonedObj.reportMetrics = reportMetrics;
+        clonedObj.metricPrefix = metricPrefix;
         return clonedObj;
     }
 
@@ -246,6 +267,10 @@ public class ConnectionStatus implements Cloneable {
         builder.append(maxQueuedCount);
         builder.append(", maxQueueBytes=");
         builder.append(maxQueuedBytes);
+        builder.append(", reportMetrics=");
+        builder.append(reportMetrics);
+        builder.append(", metricPrefix=");
+        builder.append(metricPrefix);
         builder.append("]");
         return builder.toString();
     }

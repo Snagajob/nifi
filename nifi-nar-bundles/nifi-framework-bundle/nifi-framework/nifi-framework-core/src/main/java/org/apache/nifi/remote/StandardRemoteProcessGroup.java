@@ -122,6 +122,8 @@ public class StandardRemoteProcessGroup implements RemoteProcessGroup {
     private volatile Integer proxyPort;
     private volatile String proxyUser;
     private volatile String proxyPassword;
+    private volatile Boolean monitored;
+    private volatile String metricPrefix;
 
     private String networkInterfaceName;
     private InetAddress localAddress;
@@ -324,6 +326,26 @@ public class StandardRemoteProcessGroup implements RemoteProcessGroup {
     @Override
     public void setProxyPassword(String proxyPassword) {
         this.proxyPassword = proxyPassword;
+    }
+
+    @Override
+    public Boolean getMonitored() {
+        return monitored;
+    }
+
+    @Override
+    public void setMonitored(Boolean monitored) {
+        this.monitored = monitored;
+    }
+
+    @Override
+    public String getMetricPrefix() {
+        return metricPrefix;
+    }
+
+    @Override
+    public void setMetricPrefix(String prefix) {
+        this.metricPrefix = prefix;
     }
 
     /**

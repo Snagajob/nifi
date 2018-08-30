@@ -90,7 +90,9 @@
                                     proxyPort: $('#remote-process-group-proxy-port').val(),
                                     proxyUser: $('#remote-process-group-proxy-user').val(),
                                     proxyPassword: $('#remote-process-group-proxy-password').val(),
-                                    localNetworkInterface: $('#remote-process-group-local-network-interface').val()
+                                    localNetworkInterface: $('#remote-process-group-local-network-interface').val(),
+                                    monitored: $('#remote-process-group-report-metrics-combo').combo('getSelectedOption').value,
+                                    metricPrefix: $('#remote-process-group-metric-prefix').val()
                                 }
                             };
 
@@ -161,9 +163,14 @@
                         $('#remote-process-group-proxy-port').val('');
                         $('#remote-process-group-proxy-user').val('');
                         $('#remote-process-group-proxy-password').val('');
+                        $('#remote-process-group-report-metrics-combo').combo('setSelectedOption', {
+                            value: false
+                        });
+                        $('#remote-process-group-metric-prefix').val('');
                     }
                 }
             });
+
             // initialize the transport protocol combo
             $('#remote-process-group-transport-protocol-combo').combo({
                 options: [{
@@ -172,6 +179,17 @@
                 }, {
                     text: 'HTTP',
                     value: 'HTTP'
+                }]
+            });
+
+            // initialize the report metrics combo
+            $('#remote-process-group-report-metrics-combo').combo({
+                options: [{
+                    text: 'No',
+                    value: false
+                }, {
+                    text: 'Yes',
+                    value: true
                 }]
             });
         },
@@ -204,6 +222,12 @@
                 $('#remote-process-group-transport-protocol-combo').combo('setSelectedOption', {
                     value: selectionData.component.transportProtocol
                 });
+
+                // metric reporting
+                $('#remote-process-group-report-metrics-combo').combo('setSelectedOption', {
+                    value: selectionData.component.monitored
+                });
+                $('#remote-process-group-metric-prefix').val(selectionData.component.metricPrefix);
 
                 // show the details
                 $('#remote-process-group-configuration').modal('show');

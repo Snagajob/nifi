@@ -44,6 +44,8 @@ public class RemoteProcessGroupDTO extends ComponentDTO {
     private Integer proxyPort;
     private String proxyUser;
     private String proxyPassword;
+    private Boolean monitored;
+    private String metricPrefix;
 
     private Collection<String> authorizationIssues;
     private Collection<String> validationErrors;
@@ -401,5 +403,21 @@ public class RemoteProcessGroupDTO extends ComponentDTO {
 
     public void setProxyPassword(String proxyPassword) {
         this.proxyPassword = proxyPassword;
+    }
+
+    public Boolean getMonitored() {
+        return monitored;
+    }
+
+    public void setMonitored(Boolean monitored) {
+        this.monitored = monitored;
+    }
+
+    public String getMetricPrefix() {
+        return metricPrefix;
+    }
+
+    public void setMetricPrefix(String metricPrefix) {
+        this.metricPrefix = metricPrefix;
     }
 }

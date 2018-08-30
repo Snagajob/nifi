@@ -94,6 +94,9 @@
                     name: 'Properties',
                     tabContentId: 'details-processor-properties-tab-content'
                 }, {
+                    name: 'Reporting',
+                    tabContentId: 'details-processor-reporting-tab-content'
+                }, {
                     name: 'Comments',
                     tabContentId: 'details-processor-comments-tab-content'
                 }],
@@ -139,6 +142,8 @@
                         nfCommon.clearField('read-only-execution-node');
                         nfCommon.clearField('read-only-execution-status');
                         nfCommon.clearField('read-only-processor-comments');
+                        nfCommon.clearField('read-only-report-metrics');
+                        nfCommon.clearField('read-only-metric-prefix');
 
                         // removed the cached processor details
                         $('#processor-details').removeData('processorDetails');
@@ -189,6 +194,8 @@
                     nfCommon.populateField('read-only-run-duration', nfCommon.formatDuration(details.config['runDurationMillis']));
                     nfCommon.populateField('read-only-bulletin-level', details.config['bulletinLevel']);
                     nfCommon.populateField('read-only-processor-comments', details.config['comments']);
+                    nfCommon.populateField('read-only-report-metrics', details.config['monitored']);
+                    nfCommon.populateField('read-only-metric-prefix', details.config['metricPrefix']);
 
                     var showRunSchedule = true;
 

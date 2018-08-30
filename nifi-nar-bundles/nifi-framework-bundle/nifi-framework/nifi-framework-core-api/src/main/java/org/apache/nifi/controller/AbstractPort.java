@@ -75,6 +75,8 @@ public abstract class AbstractPort implements Port {
     private final AtomicReference<String> name;
     private final AtomicReference<Position> position;
     private final AtomicReference<String> comments;
+    private final AtomicReference<Boolean> monitored;
+    private final AtomicReference<String> metricPrefix;
     private final AtomicReference<ProcessGroup> processGroup;
     private final AtomicBoolean lossTolerant;
     private final AtomicReference<ScheduledState> scheduledState;
@@ -101,6 +103,8 @@ public abstract class AbstractPort implements Port {
         outgoingConnections = new HashSet<>();
         incomingConnections = new ArrayList<>();
         comments = new AtomicReference<>();
+        monitored = new AtomicReference<>(false);
+        metricPrefix = new AtomicReference<>();
         lossTolerant = new AtomicBoolean(false);
         concurrentTaskCount = new AtomicInteger(1);
         processScheduler = scheduler;
@@ -665,5 +669,25 @@ public abstract class AbstractPort implements Port {
                 throw new IllegalStateException(this + " is already under version control");
             }
         }
+    }
+
+    @Override
+    public Boolean getMonitored() {
+        return monitored.get();
+    }
+
+    @Override
+    public void setMonitored(Boolean monitored) {
+        this.monitored.set(monitored);
+    }
+
+    @Override
+    public String getMetricPrefix() {
+        return metricPrefix.get();
+    }
+
+    @Override
+    public void setMetricPrefix(String prefix) {
+        this.metricPrefix.set(prefix);
     }
 }

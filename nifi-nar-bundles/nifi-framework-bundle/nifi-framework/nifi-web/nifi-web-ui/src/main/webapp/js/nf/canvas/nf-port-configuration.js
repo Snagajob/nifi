@@ -83,7 +83,9 @@
                         var port = {
                             'id': portId,
                             'name': $('#port-name').val(),
-                            'comments': $('#port-comments').val()
+                            'comments': $('#port-comments').val(),
+                            'monitored': $('#port-report-metrics-combo').combo('getSelectedOption').value,
+                            'metricPrefix': $('#port-metric-prefix').val()
                         };
 
                         // include the concurrent tasks if appropriate
@@ -171,8 +173,23 @@
                     $('#port-enabled').removeClass('checkbox-unchecked checkbox-checked');
                     $('#port-concurrent-tasks').val('');
                     $('#port-comments').val('');
+                    $('#port-report-metrics-combo').combo('setSelectedOption', {
+                        value: false
+                    });
+                    $('#port-metric-prefix').val('');
                 }
             }
+        });
+
+        // initialize the report metrics combo
+        $('#port-report-metrics-combo').combo({
+            options: [{
+                text: 'No',
+                value: false
+            }, {
+                text: 'Yes',
+                value: true
+            }]
         });
     };
 
@@ -210,6 +227,10 @@
                 $('#port-enabled').removeClass('checkbox-unchecked checkbox-checked').addClass(portEnableStyle);
                 $('#port-concurrent-tasks').val(selectionData.component.concurrentlySchedulableTaskCount);
                 $('#port-comments').val(selectionData.component.comments);
+                $('#port-report-metrics-combo').combo('setSelectedOption', {
+                    value: selectionData.component.monitored
+                });
+                $('#port-metric-prefix').val(selectionData.component.metricPrefix);
 
                 // show the details
                 $('#port-configuration').modal('show');

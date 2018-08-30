@@ -83,6 +83,8 @@ public class StandardOutputPortDAO extends ComponentDAO implements PortDAO {
             port.setPosition(new Position(portDTO.getPosition().getX(), portDTO.getPosition().getY()));
         }
         port.setComments(portDTO.getComments());
+        port.setMonitored(portDTO.isMonitored());
+        port.setMetricPrefix(portDTO.getMetricPrefix());
 
         // add the port
         group.addOutputPort(port);
@@ -139,7 +141,9 @@ public class StandardOutputPortDAO extends ComponentDAO implements PortDAO {
                 portDTO.getGroupAccessControl(),
                 portDTO.getConcurrentlySchedulableTaskCount(),
                 portDTO.getName(),
-                portDTO.getComments())) {
+                portDTO.getComments(),
+                portDTO.isMonitored(),
+                portDTO.getMetricPrefix())) {
 
             // validate the request
             final List<String> requestValidation = validateProposedConfiguration(portDTO);
@@ -219,7 +223,10 @@ public class StandardOutputPortDAO extends ComponentDAO implements PortDAO {
         // perform the configuration
         final String name = portDTO.getName();
         final String comments = portDTO.getComments();
+        final Boolean monitored = portDTO.isMonitored();
+        final String metricPrefix = portDTO.getMetricPrefix();
         final Integer concurrentTasks = portDTO.getConcurrentlySchedulableTaskCount();
+
         if (isNotNull(portDTO.getPosition())) {
             outputPort.setPosition(new Position(portDTO.getPosition().getX(), portDTO.getPosition().getY()));
         }
@@ -228,6 +235,12 @@ public class StandardOutputPortDAO extends ComponentDAO implements PortDAO {
         }
         if (isNotNull(comments)) {
             outputPort.setComments(comments);
+        }
+        if (isNotNull(monitored)) {
+            outputPort.setMonitored(monitored);
+        }
+        if (isNotNull(metricPrefix)) {
+            outputPort.setMetricPrefix(metricPrefix);
         }
         if (isNotNull(concurrentTasks)) {
             outputPort.setMaxConcurrentTasks(concurrentTasks);

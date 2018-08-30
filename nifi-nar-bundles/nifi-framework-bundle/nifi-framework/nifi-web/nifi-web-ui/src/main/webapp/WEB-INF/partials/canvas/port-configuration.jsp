@@ -52,5 +52,23 @@
                 <textarea cols="30" rows="4" id="port-comments" class="port-field"></textarea>
             </div>
         </div>
+        <div class="port-setting">
+            <div class="setting-name">
+                Report Metrics?
+                <div class="fa fa-question-circle" alt="Info" title="Should metrics for this port be included by Metric Reporting Tasks?"></div>
+            </div>
+            <div class="setting-field">
+                <div id="port-report-metrics-combo"></div>
+            </div>
+        </div>
+        <div class="port-setting">
+            <div class="setting-name">
+                Metric Prefix
+                <div class="fa fa-question-circle" alt="Info" title="Prefix for metrics reported by this port (default is port name)."></div>
+            </div>
+            <div class="setting-field">
+                <input type="text" id="port-metric-prefix" name="port-metric-prefix" class="small-setting-input"/>
+            </div>
+        </div>
     </div>
 </div>

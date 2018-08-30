@@ -152,6 +152,8 @@ public final class StandardProcessGroup implements ProcessGroup {
     private final AtomicReference<String> name;
     private final AtomicReference<Position> position;
     private final AtomicReference<String> comments;
+    private final AtomicReference<Boolean> monitored;
+    private final AtomicReference<String> metricPrefix;
     private final AtomicReference<String> versionedComponentId = new AtomicReference<>();
     private final AtomicReference<StandardVersionControlInformation> versionControlInfo = new AtomicReference<>();
     private static final SecureRandom randomGenerator = new SecureRandom();
@@ -188,6 +190,8 @@ public final class StandardProcessGroup implements ProcessGroup {
         this.parent = new AtomicReference<>();
         this.scheduler = scheduler;
         this.comments = new AtomicReference<>("");
+        this.monitored = new AtomicReference<>(false);
+        this.metricPrefix = new AtomicReference<>();
         this.encryptor = encryptor;
         this.flowController = flowController;
         this.variableRegistry = variableRegistry;
@@ -271,6 +275,26 @@ public final class StandardProcessGroup implements ProcessGroup {
     @Override
     public void setComments(final String comments) {
         this.comments.set(comments);
+    }
+
+    @Override
+    public Boolean getMonitored() {
+        return monitored.get();
+    }
+
+    @Override
+    public void setMonitored(Boolean monitored) {
+        this.monitored.set(monitored);
+    }
+
+    @Override
+    public String getMetricPrefix() {
+        return metricPrefix.get();
+    }
+
+    @Override
+    public void setMetricPrefix(String prefix) {
+        this.metricPrefix.set(prefix);
     }
 
     @Override

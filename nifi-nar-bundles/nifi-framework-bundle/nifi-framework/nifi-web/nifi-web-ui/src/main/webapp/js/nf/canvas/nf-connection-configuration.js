@@ -920,6 +920,10 @@
         var backPressureDataSizeThreshold = $('#back-pressure-data-size-threshold').val();
         var prioritizers = $('#prioritizer-selected').sortable('toArray');
 
+        // get metric reporting settings
+        var monitored = $('#connection-report-metrics-combo').combo('getSelectedOption').value;
+        var metricPrefix = $('#connection-metric-prefix').val();
+
         if (validateSettings()) {
             var connectionEntity = {
                 'revision': nfClient.getRevision({
@@ -945,7 +949,9 @@
                     'backPressureDataSizeThreshold': backPressureDataSizeThreshold,
                     'backPressureObjectThreshold': backPressureObjectThreshold,
                     'bends': bends,
-                    'prioritizers': prioritizers
+                    'prioritizers': prioritizers,
+                    'monitored': monitored,
+                    'metricPrefix': metricPrefix
                 }
             };
 
@@ -1008,6 +1014,10 @@
         var backPressureDataSizeThreshold = $('#back-pressure-data-size-threshold').val();
         var prioritizers = $('#prioritizer-selected').sortable('toArray');
 
+        // get metric reporting settings
+        var monitored = $('#connection-report-metrics-combo').combo('getSelectedOption').value;
+        var metricPrefix = $('#connection-metric-prefix').val();
+
         if (validateSettings()) {
             var d = nfConnection.get(connectionId);
             var connectionEntity = {
@@ -1025,7 +1035,9 @@
                     'flowFileExpiration': flowFileExpiration,
                     'backPressureDataSizeThreshold': backPressureDataSizeThreshold,
                     'backPressureObjectThreshold': backPressureObjectThreshold,
-                    'prioritizers': prioritizers
+                    'prioritizers': prioritizers,
+                    'monitored': monitored,
+                    'metricPrefix': metricPrefix
                 }
             };
 
@@ -1138,6 +1150,10 @@
 
         // reset the fields
         $('#connection-name').val('');
+        $('#connection-report-metrics-combo').combo('setSelectedOption', {
+            value: false
+        });
+        $('#connection-metric-prefix').val('');
         $('#relationship-names').css('border-width', '0').empty();
         $('#relationship-names-container').hide();
 
@@ -1219,6 +1235,9 @@
                 }, {
                     name: 'Settings',
                     tabContentId: 'connection-settings-tab-content'
+                }, {
+                    name: 'Reporting',
+                    tabContentId: 'connection-reporting-tab-content'
                 }]
             });
 
@@ -1243,6 +1262,17 @@
                 });
                 $('#prioritizer-available, #prioritizer-selected').disableSelection();
             }).fail(nfErrorHandler.handleAjaxError);
+
+            // initialize the report metrics combo
+            $('#connection-report-metrics-combo').combo({
+                options: [{
+                    text: 'No',
+                    value: false
+                }, {
+                    text: 'Yes',
+                    value: true
+                }]
+            });
         },
 
         /**
@@ -1392,6 +1422,10 @@
                     $('#flow-file-expiration').val(connection.flowFileExpiration);
                     $('#back-pressure-object-threshold').val(connection.backPressureObjectThreshold);
                     $('#back-pressure-data-size-threshold').val(connection.backPressureDataSizeThreshold);
+                    $('#connection-report-metrics-combo').combo('setSelectedOption', {
+                        value: connection.monitored
+                    });
+                    $('#connection-metric-prefix').val(connection.metricPrefix);
 
                     // format the connection id
                     nfCommon.populateField('connection-id', connection.id);

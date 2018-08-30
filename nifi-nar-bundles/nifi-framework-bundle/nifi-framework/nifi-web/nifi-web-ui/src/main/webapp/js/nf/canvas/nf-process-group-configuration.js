@@ -74,6 +74,21 @@
     };
 
     /**
+     * Initializes the reporting tab.
+     */
+    var initReporting = function() {
+        $('#process-group-report-metrics-combo').combo({
+            options: [{
+                text: 'No',
+                value: false
+            }, {
+                text: 'Yes',
+                value: true
+            }]
+        });
+    };
+
+    /**
      * Gets the controller services table.
      *
      * @returns {*|jQuery|HTMLElement}
@@ -100,7 +115,9 @@
             'component': {
                 'id': groupId,
                 'name': $('#process-group-name').val(),
-                'comments': $('#process-group-comments').val()
+                'comments': $('#process-group-comments').val(),
+                'monitored': $('#process-group-report-metrics-combo').combo('getSelectedOption').value,
+                'metricPrefix': $('#process-group-metric-prefix').val()
             }
         };
 
@@ -188,6 +205,10 @@
                     // populate the process group settings
                     $('#process-group-name').removeClass('unset').val(processGroup.name);
                     $('#process-group-comments').removeClass('unset').val(processGroup.comments);
+                    $('#process-group-report-metrics-combo').removeClass('unset').combo('setSelectedOption', {
+                        value: processGroup.monitored
+                    });
+                    $('#process-group-metric-prefix').removeClass('unset').val(processGroup.metricPrefix);
 
                     // populate the header
                     $('#process-group-configuration-header-text').text(processGroup.name + ' Configuration');
@@ -203,6 +224,8 @@
                         // populate the process group settings
                         $('#read-only-process-group-name').removeClass('unset').text(processGroup.name);
                         $('#read-only-process-group-comments').removeClass('unset').text(processGroup.comments);
+                        $('#read-only-process-group-report-metrics').removeClass('unset').text(processGroup.monitored);
+                        $('#read-only-process-group-metric-prefix').removeClass('unset').text(processGroup.metricPrefix);
 
                         // populate the header
                         $('#process-group-configuration-header-text').text(processGroup.name + ' Configuration');
@@ -301,6 +324,9 @@
                     name: 'General',
                     tabContentId: 'general-process-group-configuration-tab-content'
                 }, {
+                    name: 'Reporting',
+                    tabContentId: 'process-group-reporting-tab-content'
+                }, {
                     name: 'Controller Services',
                     tabContentId: 'process-group-controller-services-tab-content'
                 }],
@@ -309,7 +335,7 @@
                     var canWrite = nfCommon.isDefinedAndNotNull(processGroup) ? processGroup.permissions.canWrite : false;
 
                     var tab = $(this).text();
-                    if (tab === 'General') {
+                    if (tab === 'General' || tab === 'Reporting') {
                         $('#flow-cs-availability').hide();
                         $('#add-process-group-configuration-controller-service').hide();
 
@@ -338,6 +364,7 @@
 
             // initialize each tab
             initGeneral();
+            initReporting();
             nfControllerServices.init(getControllerServicesTable());
         },
 

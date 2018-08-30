@@ -136,6 +136,8 @@ public class StandardProcessorNode extends ProcessorNode implements Connectable 
     private final AtomicLong yieldExpiration;
     private final AtomicLong schedulingNanos;
     private final AtomicReference<String> versionedComponentId = new AtomicReference<>();
+    private final AtomicBoolean monitored;
+    private final AtomicReference<String> metricPrefix;
     private final ProcessScheduler processScheduler;
     private long runNanos = 0L;
     private volatile long yieldNanos;
@@ -184,10 +186,12 @@ public class StandardProcessorNode extends ProcessorNode implements Connectable 
         yieldExpiration = new AtomicLong(0L);
         concurrentTaskCount = new AtomicInteger(1);
         position = new AtomicReference<>(new Position(0D, 0D));
-        style = new AtomicReference<>(Collections.unmodifiableMap(new HashMap<String, String>()));
+        style = new AtomicReference<>(Collections.unmodifiableMap(new HashMap<>()));
         this.processGroup = new AtomicReference<>();
         processScheduler = scheduler;
         penalizationPeriod = new AtomicReference<>(DEFAULT_PENALIZATION_PERIOD);
+        monitored = new AtomicBoolean(false);
+        metricPrefix = new AtomicReference<>("");
 
         final String timeoutString = nifiProperties.getProperty(NiFiProperties.PROCESSOR_SCHEDULING_TIMEOUT);
         onScheduleTimeoutMillis = timeoutString == null ? 60000 : FormatUtils.getTimeDuration(timeoutString.trim(), TimeUnit.MILLISECONDS);
@@ -1746,5 +1750,25 @@ public class StandardProcessorNode extends ProcessorNode implements Connectable 
                 throw new IllegalStateException(this + " is already under version control");
             }
         }
+    }
+
+    @Override
+    public Boolean getMonitored() {
+        return monitored.get();
+    }
+
+    @Override
+    public void setMonitored(Boolean monitored) {
+        this.monitored.set(monitored);
+    }
+
+    @Override
+    public String getMetricPrefix() {
+        return metricPrefix.get();
+    }
+
+    @Override
+    public void setMetricPrefix(String metricPrefix) {
+        this.metricPrefix.set(metricPrefix);
     }
 }

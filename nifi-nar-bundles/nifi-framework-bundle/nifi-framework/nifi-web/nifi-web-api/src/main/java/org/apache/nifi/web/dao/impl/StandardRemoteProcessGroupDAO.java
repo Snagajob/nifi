@@ -151,7 +151,9 @@ public class StandardRemoteProcessGroupDAO extends ComponentDAO implements Remot
                 remoteProcessGroupDto.getProxyHost(),
                 remoteProcessGroupDto.getProxyPort(),
                 remoteProcessGroupDto.getProxyUser(),
-                remoteProcessGroupDto.getProxyPassword())) {
+                remoteProcessGroupDto.getProxyPassword(),
+                remoteProcessGroupDto.getMonitored(),
+                remoteProcessGroupDto.getMetricPrefix())) {
             remoteProcessGroup.verifyCanUpdate();
         }
     }
@@ -390,6 +392,8 @@ public class StandardRemoteProcessGroupDAO extends ComponentDAO implements Remot
         final Integer proxyPort = remoteProcessGroupDTO.getProxyPort();
         final String proxyUser = remoteProcessGroupDTO.getProxyUser();
         final String proxyPassword = remoteProcessGroupDTO.getProxyPassword();
+        final Boolean monitored = remoteProcessGroupDTO.getMonitored();
+        final String metricPrefix = remoteProcessGroupDTO.getMetricPrefix();
 
         final String transportProtocol = remoteProcessGroupDTO.getTransportProtocol();
         final String localNetworkInterface = remoteProcessGroupDTO.getLocalNetworkInterface();
@@ -408,6 +412,12 @@ public class StandardRemoteProcessGroupDAO extends ComponentDAO implements Remot
         }
         if (isNotNull(yieldDuration)) {
             remoteProcessGroup.setYieldDuration(yieldDuration);
+        }
+        if (isNotNull(monitored)) {
+            remoteProcessGroup.setMonitored(monitored);
+        }
+        if (isNotNull(metricPrefix)) {
+            remoteProcessGroup.setMetricPrefix(metricPrefix);
         }
         if (isNotNull(remoteProcessGroupDTO.getPosition())) {
             remoteProcessGroup.setPosition(new Position(remoteProcessGroupDTO.getPosition().getX(), remoteProcessGroupDTO.getPosition().getY()));

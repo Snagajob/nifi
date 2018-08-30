@@ -47,6 +47,9 @@ public class ProcessGroupStatus implements Cloneable {
     private int flowFilesTransferred;
     private long bytesTransferred;
 
+    private boolean reportMetrics;
+    private String metricPrefix;
+
     private Collection<ConnectionStatus> connectionStatus = new ArrayList<>();
     private Collection<ProcessorStatus> processorStatus = new ArrayList<>();
     private Collection<ProcessGroupStatus> processGroupStatus = new ArrayList<>();
@@ -254,6 +257,22 @@ public class ProcessGroupStatus implements Cloneable {
         this.bytesTransferred = bytesTransferred;
     }
 
+    public boolean isReportMetrics() {
+        return reportMetrics;
+    }
+
+    public void setReportMetrics(boolean reportMetrics) {
+        this.reportMetrics = reportMetrics;
+    }
+
+    public String getMetricPrefix() {
+        return metricPrefix;
+    }
+
+    public void setMetricPrefix(String metricPrefix) {
+        this.metricPrefix = metricPrefix;
+    }
+
     @Override
     public ProcessGroupStatus clone() {
 
@@ -277,6 +296,8 @@ public class ProcessGroupStatus implements Cloneable {
         clonedObj.bytesSent = bytesSent;
         clonedObj.flowFilesTransferred = flowFilesTransferred;
         clonedObj.bytesTransferred = bytesTransferred;
+        clonedObj.reportMetrics = reportMetrics;
+        clonedObj.metricPrefix = metricPrefix;
 
         if (connectionStatus != null) {
             final Collection<ConnectionStatus> statusList = new ArrayList<>();
@@ -358,6 +379,10 @@ public class ProcessGroupStatus implements Cloneable {
         builder.append(flowFilesSent);
         builder.append(", bytesSent=");
         builder.append(bytesSent);
+        builder.append(", reportMetrics=");
+        builder.append(reportMetrics);
+        builder.append(", metricPrefix=");
+        builder.append(metricPrefix);
         builder.append(",\n\tconnectionStatus=");
 
         for (final ConnectionStatus status : connectionStatus) {
@@ -422,6 +447,8 @@ public class ProcessGroupStatus implements Cloneable {
         target.setBytesReceived(target.getBytesReceived() + toMerge.getBytesReceived());
         target.setFlowFilesSent(target.getFlowFilesSent() + toMerge.getFlowFilesSent());
         target.setBytesSent(target.getBytesSent() + toMerge.getBytesSent());
+        target.setReportMetrics(toMerge.isReportMetrics());
+        target.setMetricPrefix(toMerge.getMetricPrefix());
 
         // if the versioned flow state to merge is sync failure allow it to take precedence.
         if (VersionedFlowState.SYNC_FAILURE.equals(toMerge.getVersionedFlowState())) {

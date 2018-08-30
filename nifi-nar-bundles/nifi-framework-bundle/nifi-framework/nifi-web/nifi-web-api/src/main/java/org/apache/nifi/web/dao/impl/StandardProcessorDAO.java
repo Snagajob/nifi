@@ -179,6 +179,12 @@ public class StandardProcessorDAO extends ComponentDAO implements ProcessorDAO {
                 if (isNotNull(config.isLossTolerant())) {
                     processor.setLossTolerant(config.isLossTolerant());
                 }
+                if (isNotNull(config.isMonitored())) {
+                    processor.setMonitored(config.isMonitored());
+                }
+                if (isNotNull(config.getMetricPrefix())) {
+                    processor.setMetricPrefix(config.getMetricPrefix());
+                }
                 if (isNotNull(configProperties)) {
                     processor.setProperties(configProperties);
                 }
@@ -190,6 +196,7 @@ public class StandardProcessorDAO extends ComponentDAO implements ProcessorDAO {
                     }
                     processor.setAutoTerminatedRelationships(relationships);
                 }
+
             } finally {
                 processor.resumeValidationTrigger();
             }

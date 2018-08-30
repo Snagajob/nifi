@@ -285,6 +285,12 @@
         if ($('#processor-comments').val() !== details.config['comments']) {
             return true;
         }
+        if ($('#report-metrics-combo').val() !== (details.config['monitored'])) {
+            return true;
+        }
+        if ($('#metric-prefix').val() !== (details.config['metricPrefix'])) {
+            return true;
+        }
 
         // defer to the property and relationship grids
         return $('#processor-properties').propertytable('isSaveRequired');
@@ -336,6 +342,8 @@
         processorConfigDto['bulletinLevel'] = $('#bulletin-level-combo').combo('getSelectedOption').value;
         processorConfigDto['schedulingStrategy'] = schedulingStrategy;
         processorConfigDto['comments'] = $('#processor-comments').val();
+        processorConfigDto['monitored'] = $('#report-metrics-combo').combo('getSelectedOption').value;
+        processorConfigDto['metricPrefix'] = $('#metric-prefix').val();
 
         // run duration
         if (processor.supportsBatching === true) {
@@ -536,6 +544,9 @@
                     name: 'Properties',
                     tabContentId: 'processor-properties-tab-content'
                 }, {
+                    name: 'Reporting',
+                    tabContentId: 'processor-reporting-tab-content'
+                }, {
                     name: 'Comments',
                     tabContentId: 'processor-comments-tab-content'
                 }],
@@ -578,6 +589,17 @@
                         nfCommon.toggleScrollable($('#' + this.find('.tab-container').attr('id') + '-content').get(0));
                     }
                 }
+            });
+
+            // initialize the report metrics combo
+            $('#report-metrics-combo').combo({
+                options: [{
+                    text: 'No',
+                    value: false
+                }, {
+                    text: 'Yes',
+                    value: true
+                }]
             });
 
             // initialize the bulletin combo
@@ -697,6 +719,12 @@
                     } else {
                         $('#run-duration-setting-container').hide();
                     }
+
+                    // set report metrics values
+                    $('#report-metrics-combo').combo('setSelectedOption', {
+                        value: processor.config['monitored']
+                    });
+                    $('#metric-prefix').val(processor.config['metricPrefix']);
 
                     // select the appropriate bulletin level
                     $('#bulletin-level-combo').combo('setSelectedOption', {

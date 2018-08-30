@@ -118,6 +118,33 @@
                     </div>
                 </div>
             </div>
+            <div id="read-only-connection-reporting-tab-content" class="details-tab">
+                <div class="settings-left">
+                    <div class="setting">
+                        <div class="connection-report-metrics-setting">
+                            <div class="setting-name">
+                                Report Metrics?
+                                <div class="fa fa-question-circle" alt="Info" title="Should metrics for this connection be included by Metric Reporting Tasks?"></div>
+                            </div>
+                            <div class="setting-field">
+                                <span id="read-only-connection-report-metrics"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setting">
+                        <div class="connection-metric-prefix-setting">
+                            <div class="setting-name">
+                                Metric Prefix
+                                <div class="fa fa-question-circle" alt="Info" title="Prefix for metrics reported by this connection (default is connection name)."></div>
+                            </div>
+                            <div class="setting-field">
+                                <span id="read-only-connection-metric-prefix"></span>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

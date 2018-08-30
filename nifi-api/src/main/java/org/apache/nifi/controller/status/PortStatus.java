@@ -36,6 +36,9 @@ public class PortStatus implements Cloneable {
     private Boolean transmitting;
     private RunStatus runStatus;
 
+    private boolean reportMetrics;
+    private String metricPrefix;
+
     public Boolean isTransmitting() {
         return transmitting;
     }
@@ -152,6 +155,22 @@ public class PortStatus implements Cloneable {
         return transmitting;
     }
 
+    public boolean isReportMetrics() {
+        return reportMetrics;
+    }
+
+    public void setReportMetrics(boolean reportMetrics) {
+        this.reportMetrics = reportMetrics;
+    }
+
+    public String getMetricPrefix() {
+        return metricPrefix;
+    }
+
+    public void setMetricPrefix(String metricPrefix) {
+        this.metricPrefix = metricPrefix;
+    }
+
     @Override
     public PortStatus clone() {
         final PortStatus clonedObj = new PortStatus();
@@ -169,6 +188,8 @@ public class PortStatus implements Cloneable {
         clonedObj.bytesSent = bytesSent;
         clonedObj.transmitting = transmitting;
         clonedObj.runStatus = runStatus;
+        clonedObj.reportMetrics = reportMetrics;
+        clonedObj.metricPrefix = metricPrefix;
         return clonedObj;
     }
 
@@ -195,6 +216,10 @@ public class PortStatus implements Cloneable {
         builder.append(outputBytes);
         builder.append(", runStatus=");
         builder.append(runStatus);
+        builder.append(", reportMetrics=");
+        builder.append(reportMetrics);
+        builder.append(", metricPrefix=");
+        builder.append(metricPrefix);
         builder.append("]");
         return builder.toString();
     }

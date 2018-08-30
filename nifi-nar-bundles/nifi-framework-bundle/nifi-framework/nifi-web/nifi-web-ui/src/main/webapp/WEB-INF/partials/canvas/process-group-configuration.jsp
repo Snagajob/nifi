@@ -45,9 +45,37 @@
                             <span id="read-only-process-group-comments"></span>
                         </div>
                     </div>
-                    <div class="editable settings-buttons">
-                        <div id="process-group-configuration-save" class="button">Apply</div>
-                        <div class="clear"></div>
+                </div>
+            </div>
+            <div id="process-group-reporting-tab-content" class="configuration-tab">
+                <div class="settings-left">
+                    <div class="setting">
+                        <div class="report-metrics-setting">
+                            <div class="setting-name">
+                                Report Metrics?
+                                <div class="fa fa-question-circle" alt="Info" title="Should metrics for this process group be included by Metric Reporting Tasks?"></div>
+                            </div>
+                            <div class="editable setting-field">
+                                <div id="process-group-report-metrics-combo"></div>
+                            </div>
+                            <div class="read-only setting-field">
+                                <span id="read-only-process-group-report-metrics"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setting">
+                        <div class="metric-prefix-setting">
+                            <div class="setting-name">
+                                Metric Prefix
+                                <div class="fa fa-question-circle" alt="Info" title="Prefix for metrics reported by this process group (default is group name)."></div>
+                            </div>
+                            <div class="editable setting-field">
+                                <input type="text" id="process-group-metric-prefix" name="process-group-metric-prefix" class="small-setting-input"/>
+                            </div>
+                            <div class="read-only setting-field">
+                                <span id="read-only-process-group-metric-prefix"></span>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -63,6 +91,7 @@
         </div>
         <div id="process-group-configuration-loading-container" class="loading-container"></div>
         <div id="flow-cs-availability" class="hidden">Listed services are available to all descendant Processors and services of this Process Group.</div>
+        <div id="process-group-configuration-save" class="button">Apply</div>
         <div class="clear"></div>
     </div>
 </div>

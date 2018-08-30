@@ -42,6 +42,9 @@ public class ConnectionDTO extends ComponentDTO {
     private List<String> prioritizers;
     private List<PositionDTO> bends;
 
+    private Boolean monitored;
+    private String metricPrefix;
+
     /**
      * The source of this connection.
      *
@@ -234,5 +237,33 @@ public class ConnectionDTO extends ComponentDTO {
     @Override
     public String toString() {
         return "ConnectionDTO [id: " + getId() + "]";
+    }
+
+    /**
+     * @return whether or not this Connection reports metrics for monitoring
+     */
+    @ApiModelProperty(
+            value = "Whether this connection reports metrics for monitoring"
+    )
+    public Boolean isMonitored() {
+        return monitored;
+    }
+
+    public void setMonitored(final Boolean monitored) {
+        this.monitored = monitored;
+    }
+
+    /**
+     * @return prefix for metric names reported for this connection
+     */
+    @ApiModelProperty(
+            value = "Prefix for metric names reported for this connection"
+    )
+    public String getMetricPrefix() {
+        return metricPrefix;
+    }
+
+    public void setMetricPrefix(String metricPrefix) {
+        this.metricPrefix = metricPrefix;
     }
 }

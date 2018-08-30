@@ -50,6 +50,9 @@ public class ProcessGroupDTO extends ComponentDTO {
 
     private FlowSnippetDTO contents;
 
+    private Boolean monitored;
+    private String metricPrefix;
+
     public ProcessGroupDTO() {
         super();
     }
@@ -275,5 +278,33 @@ public class ProcessGroupDTO extends ComponentDTO {
 
     public void setVersionControlInformation(final VersionControlInformationDTO versionControlInformation) {
         this.versionControlInformation = versionControlInformation;
+    }
+
+    /**
+     * @return whether or not this Processor Group reports metrics for monitoring
+     */
+    @ApiModelProperty(
+            value = "Whether this processor group reports metrics for monitoring"
+    )
+    public Boolean isMonitored() {
+        return monitored;
+    }
+
+    public void setMonitored(final Boolean monitored) {
+        this.monitored = monitored;
+    }
+
+    /**
+     * @return prefix for metric names reported for this Processor Group
+     */
+    @ApiModelProperty(
+            value = "Prefix for metric names reported for this processor group"
+    )
+    public String getMetricPrefix() {
+        return metricPrefix;
+    }
+
+    public void setMetricPrefix(String metricPrefix) {
+        this.metricPrefix = metricPrefix;
     }
 }

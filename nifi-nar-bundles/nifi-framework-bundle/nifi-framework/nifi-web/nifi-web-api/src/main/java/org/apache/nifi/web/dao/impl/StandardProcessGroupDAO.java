@@ -73,6 +73,12 @@ public class StandardProcessGroupDAO extends ComponentDAO implements ProcessGrou
         if (processGroup.getPosition() != null) {
             group.setPosition(new Position(processGroup.getPosition().getX(), processGroup.getPosition().getY()));
         }
+        if (processGroup.isMonitored() != null) {
+            group.setMonitored(processGroup.isMonitored());
+        }
+        if (processGroup.getMetricPrefix() != null) {
+            group.setMetricPrefix(processGroup.getMetricPrefix());
+        }
 
         // add the process group
         group.setParent(parentGroup);
@@ -300,6 +306,8 @@ public class StandardProcessGroupDAO extends ComponentDAO implements ProcessGrou
 
         final String name = processGroupDTO.getName();
         final String comments = processGroupDTO.getComments();
+        final Boolean monitored = processGroupDTO.isMonitored();
+        final String metricPrefix = processGroupDTO.getMetricPrefix();
 
         if (isNotNull(name)) {
             group.setName(name);
@@ -313,6 +321,12 @@ public class StandardProcessGroupDAO extends ComponentDAO implements ProcessGrou
         }
         if (isNotNull(comments)) {
             group.setComments(comments);
+        }
+        if (isNotNull(monitored)) {
+            group.setMonitored(monitored);
+        }
+        if (isNotNull(metricPrefix)) {
+            group.setMetricPrefix(metricPrefix);
         }
 
         group.onComponentModified();

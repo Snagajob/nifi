@@ -65,6 +65,8 @@ public final class StandardConnection implements Connection {
     private final String id;
     private final AtomicReference<ProcessGroup> processGroup;
     private final AtomicReference<String> name;
+    private final AtomicReference<Boolean> monitored;
+    private final AtomicReference<String> metricPrefix;
     private final AtomicReference<List<Position>> bendPoints;
     private final Connectable source;
     private final AtomicReference<Connectable> destination;
@@ -81,6 +83,8 @@ public final class StandardConnection implements Connection {
         name = new AtomicReference<>(builder.name);
         bendPoints = new AtomicReference<>(Collections.unmodifiableList(new ArrayList<>(builder.bendPoints)));
         processGroup = new AtomicReference<>(builder.processGroup);
+        monitored = new AtomicReference<>(false);
+        metricPrefix = new AtomicReference<>();
         source = builder.source;
         destination = new AtomicReference<>(builder.destination);
         relationships = new AtomicReference<>(Collections.unmodifiableCollection(builder.relationships));
@@ -562,5 +566,25 @@ public final class StandardConnection implements Connection {
                 throw new IllegalStateException(this + " is already under version control");
             }
         }
+    }
+
+    @Override
+    public Boolean getMonitored() {
+        return monitored.get();
+    }
+
+    @Override
+    public void setMonitored(Boolean monitored) {
+        this.monitored.set(monitored);
+    }
+
+    @Override
+    public String getMetricPrefix() {
+        return metricPrefix.get();
+    }
+
+    @Override
+    public void setMetricPrefix(String prefix) {
+        this.metricPrefix.set(prefix);
     }
 }

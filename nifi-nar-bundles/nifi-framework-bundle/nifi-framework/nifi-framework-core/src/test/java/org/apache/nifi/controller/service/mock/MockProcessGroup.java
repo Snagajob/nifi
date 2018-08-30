@@ -124,6 +124,26 @@ public class MockProcessGroup implements ProcessGroup {
     }
 
     @Override
+    public Boolean getMonitored() {
+        return false;
+    }
+
+    @Override
+    public void setMonitored(Boolean monitored) {
+
+    }
+
+    @Override
+    public String getMetricPrefix() {
+        return null;
+    }
+
+    @Override
+    public void setMetricPrefix(String prefix) {
+
+    }
+
+    @Override
     public ProcessGroupCounts getCounts() {
         return null;
     }

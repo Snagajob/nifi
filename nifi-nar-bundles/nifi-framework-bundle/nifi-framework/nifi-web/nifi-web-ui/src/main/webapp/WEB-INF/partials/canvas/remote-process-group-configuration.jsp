@@ -119,5 +119,26 @@
             </div>
             <div class="clear"></div>
         </div>
+        <div class="setting">
+            <div class="remote-process-group-setting-left">
+                <div class="setting-name">
+                    Report Metrics?
+                    <div class="fa fa-question-circle" alt="Info" title="Should metrics for this processor be included by Metric Reporting Tasks?"></div>
+                </div>
+                <div class="setting-field">
+                    <div id="remote-process-group-report-metrics-combo"></div>
+                </div>
+            </div>
+            <div class="remote-process-group-setting-right">
+                <div class="setting-name">
+                    Metric Prefix
+                    <div class="fa fa-question-circle" alt="Info" title="Prefix for metrics reported by this processor (default is name of process group)."></div>
+                </div>
+                <div class="setting-field">
+                    <input type="text" id="remote-process-group-metric-prefix" name="remote-process-group-metric-prefix" class="small-setting-input"/>
+                </div>
+            </div>
+            <div class="clear"></div>
+        </div>
     </div>
 </div>

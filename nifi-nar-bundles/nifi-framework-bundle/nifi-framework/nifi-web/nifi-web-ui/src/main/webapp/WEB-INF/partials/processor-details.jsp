@@ -155,6 +155,33 @@
             <div id="details-processor-properties-tab-content" class="details-tab">
                 <div id="read-only-processor-properties"></div>
             </div>
+            <div id="details-processor-reporting-tab-content" class="details-tab">
+                <div class="settings-left">
+                    <div class="setting">
+                        <div class="report-metrics-setting">
+                            <div class="setting-name">
+                                Report Metrics?
+                                <div class="fa fa-question-circle" alt="Info" title="Should metrics for this processor be included by Metric Reporting Tasks?"></div>
+                            </div>
+                            <div class="setting-field">
+                                <span id="read-only-report-metrics"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="setting">
+                        <div class="metric-prefix-setting">
+                            <div class="setting-name">
+                                Metric Prefix
+                                <div class="fa fa-question-circle" alt="Info" title="Prefix for metrics reported by this processor (default is processor name)."></div>
+                            </div>
+                            <div class="setting-field">
+                                <span id="read-only-metric-prefix"></span>
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
             <div id="details-processor-comments-tab-content" class="details-tab">
                 <div class="setting">
                     <div class="setting-name">Comments</div>

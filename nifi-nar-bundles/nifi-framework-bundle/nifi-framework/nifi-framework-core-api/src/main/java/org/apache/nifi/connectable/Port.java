@@ -18,6 +18,14 @@ package org.apache.nifi.connectable;
 
 public interface Port extends Connectable {
 
+    Boolean getMonitored();
+
+    void setMonitored(Boolean monitored);
+
+    String getMetricPrefix();
+
+    void setMetricPrefix(String prefix);
+
     void shutdown();
 
     boolean isValid();

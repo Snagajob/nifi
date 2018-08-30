@@ -1088,6 +1088,8 @@ public class StandardFlowSynchronizer implements FlowSynchronizer {
             procNode.setPenalizationPeriod(config.getPenaltyDuration());
             procNode.setYieldPeriod(config.getYieldDuration());
             procNode.setBulletinLevel(LogLevel.valueOf(config.getBulletinLevel()));
+            procNode.setMonitored(config.isMonitored());
+            procNode.setMetricPrefix(config.getMetricPrefix());
             updateNonFingerprintedProcessorSettings(procNode, processorDTO);
 
             if (config.getSchedulingStrategy() != null) {
@@ -1147,6 +1149,8 @@ public class StandardFlowSynchronizer implements FlowSynchronizer {
         final ProcessGroupDTO processGroupDTO = FlowFromDOMFactory.getProcessGroup(parentId, processGroupElement, encryptor, encodingVersion);
         final ProcessGroup processGroup = controller.createProcessGroup(processGroupDTO.getId());
         processGroup.setComments(processGroupDTO.getComments());
+        processGroup.setMonitored(processGroupDTO.isMonitored());
+        processGroup.setMetricPrefix(processGroupDTO.getMetricPrefix());
         processGroup.setVersionedComponentId(processGroupDTO.getVersionedComponentId());
         processGroup.setPosition(toPosition(processGroupDTO.getPosition()));
         processGroup.setName(processGroupDTO.getName());
@@ -1232,6 +1236,8 @@ public class StandardFlowSynchronizer implements FlowSynchronizer {
             port.setVersionedComponentId(portDTO.getVersionedComponentId());
             port.setPosition(toPosition(portDTO.getPosition()));
             port.setComments(portDTO.getComments());
+            port.setMonitored(portDTO.isMonitored());
+            port.setMetricPrefix(portDTO.getMetricPrefix());
             port.setProcessGroup(processGroup);
 
             final Set<String> userControls = portDTO.getUserAccessControl();
@@ -1277,6 +1283,8 @@ public class StandardFlowSynchronizer implements FlowSynchronizer {
             port.setVersionedComponentId(portDTO.getVersionedComponentId());
             port.setPosition(toPosition(portDTO.getPosition()));
             port.setComments(portDTO.getComments());
+            port.setMonitored(portDTO.isMonitored());
+            port.setMetricPrefix(portDTO.getMetricPrefix());
             port.setProcessGroup(processGroup);
 
             final Set<String> userControls = portDTO.getUserAccessControl();
@@ -1381,6 +1389,14 @@ public class StandardFlowSynchronizer implements FlowSynchronizer {
                 remoteGroup.setProxyPassword(remoteGroupDto.getProxyPassword());
             }
 
+            if (remoteGroupDto.getMonitored() != null) {
+                remoteGroup.setMonitored(remoteGroupDto.getMonitored());
+            }
+
+            if (remoteGroupDto.getMetricPrefix() != null) {
+                remoteGroup.setMetricPrefix(remoteGroupDto.getMetricPrefix());
+            }
+
             if (StringUtils.isBlank(remoteGroupDto.getLocalNetworkInterface())) {
                 remoteGroup.setNetworkInterface(null);
             } else {
@@ -1454,6 +1470,8 @@ public class StandardFlowSynchronizer implements FlowSynchronizer {
             }
 
             final Connection connection = controller.createConnection(dto.getId(), dto.getName(), source, destination, dto.getSelectedRelationships());
+            connection.setMonitored(dto.isMonitored());
+            connection.setMetricPrefix(dto.getMetricPrefix());
             connection.setVersionedComponentId(dto.getVersionedComponentId());
             connection.setProcessGroup(processGroup);
 
